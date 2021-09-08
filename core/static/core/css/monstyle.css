@@ -1,0 +1,20 @@
+@charset "UTF-8";
+header {
+    background: rgb(197, 217, 236);
+    color: rgb(85, 124, 231);
+    flex: display;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 40px;
+    font-family: sans-serif;
+}
+
+.fond-ecran {
+    background-image: url("/static/core/assets/img/bg-masthead.jpg");
+    font-size: xx-large;
+}
+
+footer {
+    background: rgb(197, 217, 236);
+    color: rgb(85, 124, 231);
+}
