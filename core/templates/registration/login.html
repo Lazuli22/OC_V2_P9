@@ -1,0 +1,11 @@
+{% block content %} {% load crispy_forms_tags %}
+
+<!--Login-->
+<div class="container py-5">
+    <h2>Connectez-vous</h2>
+    <form method="POST">
+        {% csrf_token %} {{ login_form|crispy }}
+        <button class="style-button" type="submit">Se connecter</button>
+    </form>
+</div>
+{% endblock %}

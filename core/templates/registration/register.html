@@ -1,0 +1,10 @@
+{% block content %} {% load crispy_forms_tags %}
+
+<div id="creation-account">
+    <h2>Inscrivez - vous</H2>
+    <form method="post">
+        {% csrf_token %} {{ register_form|crispy}}
+        <button type="submit" class="style-button">S'inscrire</button>
+    </form>
+</div>
+{% endblock %}

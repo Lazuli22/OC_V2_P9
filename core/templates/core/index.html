@@ -1,1 +1,12 @@
-{% extends 'core/base.html' %} {% block content %} Test un deux Test !!! {% endblock%}
+{% extends 'core/base.html' %} {% block content %}
+
+<div id="container">
+    <div id="register_form">
+        {% include 'registration/register.html' %}
+    </div>
+    <div>
+        {% include 'registration/login.html' %}
+    </div>
+
+</div>
+{% endblock%}

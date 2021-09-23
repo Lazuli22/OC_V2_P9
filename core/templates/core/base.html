@@ -16,43 +16,45 @@
 </head>
 
 <body>
-    <!-- Navigation-->
-    <header>
-        <div>
-            LITREVIEW
-        </div>
-    </header>
+    <div class="brand"><a href="/">LitReview</a></div>
+    <div class="address-bar"> Le site où les critiques font grandir !</div>
+
 
     <!-- Masthead-->
-    <section class="fond-ecran">
 
-        {% block content %} {% endblock %}
-
-    </section>
-
-    <footer class="footer">
-        <div class="list-inline-item"><a href="#!">About</a> </div>
-        <div class="list-inline-item"><a href="#!">Contact</a></div>
-        <div class="list-inline-item"><a href="#!">Terms of Use</a></div>
-        <div class="list-inline-item"><a href="#!">Privacy Policy</a></div>
-        <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
-            <ul class="list-inline mb-0">
-                <li class="list-inline-item me-4">
-                    <a href="#!"><i class="bi-facebook fs-3"></i></a>
-                </li>
-                <li class="list-inline-item me-4">
-                    <a href="#!"><i class="bi-twitter fs-3"></i></a>
-                </li>
-                <li class="list-inline-item">
-                    <a href="#!"><i class="bi-instagram fs-3"></i></a>
-                </li>
-            </ul>
+    <div class="container">
+        <div class="row">
+            <div class="box">
+                {% block content %}{% endblock %}
+            </div>
         </div>
-        </div>
+    </div>
+    <!-- Section à optimiser par l'utilisation de flexbox-->
+    <footer>
+        <div id="container-footer">
+            <div><a href="#!">About</a></div>
+            <div><a href="#!">Contact</a></div>
+            <div><a href="#!">Terms of Use</a></div>
+            <div><a href="#!">Privacy Policy</a></div>
+
+            <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item me-4">
+                        <a href="#!"><i class="bi-facebook fs-3"></i></a>
+                    </li>
+                    <li class="list-inline-item me-4">
+                        <a href="#!"><i class="bi-twitter fs-3"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#!"><i class="bi-instagram fs-3"></i></a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </footer>
-    <!-- Bootstrap core JS-->
-    <script src="{% static 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Bootstrap core JS
+    <script src="{% static 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>-->
     <!-- Core theme JS-->
     <script src="{% static 'core/js/scripts.js' %}"></script>
     <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->

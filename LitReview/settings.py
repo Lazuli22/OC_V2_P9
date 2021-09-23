@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -27,6 +28,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Page d'authentification 
+
+LOGIN_REDIRECT_URL = '/home'
+
 
 # Application definition
 # Créer une autre application userfollow 
@@ -41,6 +46,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'review.apps.ReviewConfig',
     'userfollows.apps.UserfollowsConfig',
+    'crispy_forms',
 ]
 
 STATIC_URL = '/static/'
@@ -60,7 +66,7 @@ ROOT_URLCONF = 'LitReview.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [str(BASE_DIR.joinpath('templates'))],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -81,9 +87,12 @@ WSGI_APPLICATION = 'LitReview.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql', # on utilise l'adaptateur postgresql
-        'NAME': 'litreview', # le nom de notre base de donnees creee precedemment
-        'USER': 'ddiaz', # attention : remplacez par votre nom d'utilisateur
+        'ENGINE': 'django.db.backends.postgresql', 
+        # on utilise l'adaptateur postgresql
+        'NAME': 'litreview', 
+        # le nom de notre base de donnees creee precedemment
+        'USER': 'ddiaz', 
+        # attention : remplacez par votre nom d'utilisateur
         'PASSWORD': 'Lolita',
         'HOST': '',
         'PORT': '5432',
