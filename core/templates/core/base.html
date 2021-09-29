@@ -5,8 +5,8 @@
 
 <head>
     <title>Page de LitReview</title>
-    <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Favicon
+    <link rel="icon" type="image/x-icon" href="core/assets/favicon.ico" /> -->
     <!-- Bootstrap icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
     <!-- Google fonts-->
@@ -19,9 +19,9 @@
     <div class="brand"><a href="/">LitReview</a></div>
     <div class="address-bar"> Le site où les critiques font grandir !</div>
 
+    {% block menu %} {% endblock %}
 
     <!-- Masthead-->
-
     <div class="container">
         <div class="row">
             <div class="box">
@@ -61,7 +61,7 @@
     <!-- * *                               SB Forms JS                               * *-->
     <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
     <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-    <script src="{% static 'https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    <!-- <script src="{% static 'https://cdn.startbootstrap.com/sb-forms-latest.js'%}"></script> -->
 </body>
 
 </html>
