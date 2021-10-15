@@ -47,7 +47,7 @@ footer p {
 .style-button {
     display: inline-block;
     padding: 15px;
-    font-size: 10x;
+    font-size: 15px;
     cursor: pointer;
     text-align: center;
     text-decoration: none;
@@ -57,7 +57,8 @@ footer p {
     border: none;
     border-radius: 15px;
     box-shadow: 0 9px #999;
-    margin: 50px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .style-button:hover {
@@ -108,8 +109,41 @@ footer p {
     text-decoration: none;
 }
 
+#id_user_list {
+    width: 1000px;
+    height: 25px;
+}
+
 .form-group {
-    flex: display;
+    display: flex;
     justify-content: space-around;
     align-items: center;
+    border: 2px solid rgb(172, 172, 214);
+    border-radius: .5em;
+    padding: 10px;
+    margin-left: 5px;
+}
+
+.form-search {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.item-menu {
+    border: 2px solid rgb(172, 172, 214);
+    border-radius: .5em;
+    padding: 10px;
+    margin-left: 5px;
+}
+
+.item-menu>a {
+    text-decoration: none;
+    color: black;
+}
+
+td {
+    font-size: 15px;
+    border: solid rgb(184, 171, 241);
+    border-radius: 5%;
 }

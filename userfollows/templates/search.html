@@ -1,0 +1,11 @@
+{% block content %}
+<h2>Suivre d'autres utilisateurs:</h2>
+<form action="{% url 'search' %}" method="POST" class="form-group">
+    {% csrf_token %}
+    <div><label for="username" class="control-label">Username: </label> </div>
+    <div>
+        {% for e in form %} {{ e }} {% endfor %}
+    </div>
+    <div><button class="style-button" type="submit">S'abonner</button></div>
+</form>
+{% endblock %}

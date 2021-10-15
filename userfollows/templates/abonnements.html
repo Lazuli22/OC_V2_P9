@@ -1,0 +1,19 @@
+{% block content %}
+<h2>Abonnements:</h2>
+<div class="form-group">
+    <table>
+        <tbody>{%for e in followedUserObj%}
+            <tr>
+                <td width=1500px>{{e}}</td>
+                <td width=10%>
+                    <a href="{% url 'unsubscribe' e%}"> 
+                    Désabonner
+                    </a>
+                </td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+
+</div>
+{% endblock %}
