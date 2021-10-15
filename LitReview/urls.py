@@ -23,6 +23,7 @@ urlpatterns = [
     url('register/', views.register_request, name="register_request"),
     url('login/', views.login_request, name="login_request"),
     path('home/', views.home, name="home"),
+    path('ticket/', views.create_ticket, name="create_ticket"),
     url('userfollows/', include('userfollows.urls')),
     url('admin/', admin.site.urls),
 ]

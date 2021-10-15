@@ -10,9 +10,9 @@ from .forms import UserForm
 
 def listing(request):
     if request.method == "POST":
-        form = UserForm(request.POST)
+        form = UserForm(request.POST, user=request.user)
     else:
-        form = UserForm()
+        form = UserForm(user=request.user)
     context = {"form": form}
     followedUsers = UserFollows.objects.filter(user=request.user)
     followedUserObj = []
@@ -31,16 +31,14 @@ def listing(request):
 
 def search(request):
     if request.method == "POST":
-        form = UserForm(request.POST)
+        form = UserForm(request.POST, user=request.user)
         context = {"form": form}
         option_value = request.POST.getlist('user_list')
         if option_value is not None:
             user_chosen = User.objects.get(username=option_value[0])
             context["user_chosen"] = user_chosen
             b = UserFollows(user=request.user, followed_user=user_chosen)
-            b.save()
-            return listing(request)
-            #(request, "follows.html", context)      
+            b.save()    
     return listing(request)
 
 
@@ -51,3 +49,4 @@ def unsubscribe(request, username):
         )
     userFollowstoDel.delete()
     return listing(request)
+    

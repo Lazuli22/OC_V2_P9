@@ -114,7 +114,8 @@ footer p {
     height: 25px;
 }
 
-.form-group {
+.form-group,
+h1 {
     display: flex;
     justify-content: space-around;
     align-items: center;

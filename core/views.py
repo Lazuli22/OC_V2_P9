@@ -64,3 +64,9 @@ def connection(request):
                 "login_form": login_form
                 }
             )
+
+
+def create_ticket(request):
+    return render(
+        request=request,
+        template_name="ticket/ticket.html")

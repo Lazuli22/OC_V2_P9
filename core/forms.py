@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import User
 
 
-# Create your forms here
+# USerForm
 class NewUserForm(UserCreationForm):
     email = forms.EmailField(required=True)
 
@@ -22,3 +22,8 @@ class NewUserForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+
+# TicketForm
+class NewTicket(forms.Form):
+    pass
