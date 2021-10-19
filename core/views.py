@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import NewUserForm
+from .forms import NewTicketForm, NewUserForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
@@ -67,6 +67,14 @@ def connection(request):
 
 
 def create_ticket(request):
-    return render(
-        request=request,
-        template_name="ticket/ticket.html")
+    if request.method == "POST":
+        ticket_form = NewTicketForm(request.POST, request.FILES)
+        if ticket_form.is_valid():
+            ticket_form.save(request.user)
+            return redirect("posts")
+    else:
+        ticket_form = NewTicketForm()
+        return render(
+            request=request,
+            template_name="ticket/ticket.html",
+            context={"ticket_form": ticket_form})

@@ -125,6 +125,16 @@ h1 {
     margin-left: 5px;
 }
 
+.post-group {
+    font-size: 15px;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid rgb(172, 172, 214);
+    border-radius: .5em;
+    padding: 10px;
+    margin-left: 5px;
+}
+
 .form-search {
     display: flex;
     justify-content: space-around;

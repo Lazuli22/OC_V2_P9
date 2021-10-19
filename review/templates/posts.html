@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %} {% block menu%} {%include 'core/menu.html'%} {% endblock%} {% block content %}
+<H1>Bienvenue sur mes posts</H1>
+<div class="container">
+    <div class="row">
+        <div class="box">
+            <div class="post-group">
+                {% for e in my_posts %}
+                <div class="post-group">
+                    <p style="font-style: italic;">Vous avez publié un ticket le {{e.time_created}}</p>
+                    <div style="font-weight: bold;">
+                        {{e.ticket}}
+                    </div>
+                    <p>
+                        {{e.description}}
+                    </p>
+                    <div>
+                        {{e.image}}
+                        <img src="../media/{{e.image}}" class="img-responsive" style="width: 100%; float: left; margin-right: 10px;" />
+                    </div>
+                    <div style="float:right;"><button style="margin: 10px;" class="style-button">Modifier</button><button class="style-button">Supprimer</button></div>
+                    <div style="clear: right;"></div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

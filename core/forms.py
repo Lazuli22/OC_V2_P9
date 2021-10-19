@@ -1,6 +1,8 @@
 from django import forms
+from django import forms
+from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
-from .models import User
+from .models import Ticket, User
 
 
 # USerForm
@@ -25,5 +27,18 @@ class NewUserForm(UserCreationForm):
 
 
 # TicketForm
-class NewTicket(forms.Form):
-    pass
+class NewTicketForm(ModelForm):
+    class Meta:
+        model = Ticket
+        fields = [
+            "ticket",
+            "description",
+            "image"
+            ]
+
+    def save(self, user_name,  commit=True,):
+        ticket = super(NewTicketForm, self).save(commit=False)
+        ticket.user = user_name
+        if commit:
+            ticket.save()
+        return ticket
