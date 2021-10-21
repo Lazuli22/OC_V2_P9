@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %} {% block menu%} {%include 'core/menu.html'%} {% endblock%} {% block content %}
+<H1>Modifier un ticket</H1>
+<form action="{% url 'create_ticket'%}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class=" form-group ">
+        <label for="titre " class="control-label "> Titre</label> {{ ticket_form.ticket }}
+    </div>
+    <div class="form-group ">
+        <label for="description " class="control-label ">Description</label> {{ ticket_form.description }}
+    </div>
+    <div class="form-group ">
+        <label for="image " class="control-label ">Image  </label> {{ ticket_form.image }}
+        <button type="submit ">Upload</button>
+    </div>
+    <button type="submit " class="style-button ">Envoyer</button>
+</form>
+{% endblock%}

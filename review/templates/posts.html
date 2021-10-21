@@ -17,7 +17,15 @@
                         {{e.image}}
                         <img src="../media/{{e.image}}" class="img-responsive" style="width: 100%; float: left; margin-right: 10px;" />
                     </div>
-                    <div style="float:right;"><button style="margin: 10px;" class="style-button">Modifier</button><button class="style-button">Supprimer</button></div>
+                    <div style="float:right;">
+                        <form action="{% url 'modify_post' e.id%}" method="post">
+                            {% csrf_token %}
+                            <button style="margin: 10px;" class="style-button">Modifier</button>
+                        </form>
+                        <form action="{% url 'delete_post' e.id%}" method="post">
+                            {% csrf_token %}
+                            <button class="style-button">Supprimer</button></div>
+                    </form>
                     <div style="clear: right;"></div>
                 </div>
                 {% endfor %}
