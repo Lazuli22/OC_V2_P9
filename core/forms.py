@@ -1,5 +1,4 @@
 from django import forms
-from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from .models import Ticket, User
@@ -36,9 +35,9 @@ class NewTicketForm(ModelForm):
             "image"
             ]
 
-    def save(self, user_name,  commit=True,):
+    def save(self, user_id, commit=True,):
         ticket = super(NewTicketForm, self).save(commit=False)
-        ticket.user = user_name
+        ticket.user_id = user_id
         if commit:
             ticket.save()
         return ticket

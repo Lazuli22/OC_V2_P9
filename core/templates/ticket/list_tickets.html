@@ -1,5 +1,5 @@
 {% extends 'core/base.html' %} {% block menu%} {%include 'core/menu.html'%} {% endblock%} {% block content %}
-<H1>Bienvenue sur mes posts</H1>
+<H1>Bienvenue sur tes posts</H1>
 <div class="container">
     <div class="row">
         <div class="box">
@@ -14,15 +14,14 @@
                         {{e.description}}
                     </p>
                     <div>
-                        {{e.image}}
                         <img src="../media/{{e.image}}" class="img-responsive" style="width: 100%; float: left; margin-right: 10px;" />
                     </div>
                     <div style="float:right;">
-                        <form action="{% url 'modify_post' e.id%}" method="post">
+                        <form action="{% url 'update_ticket' e.id%}" method="get">
                             {% csrf_token %}
                             <button style="margin: 10px;" class="style-button">Modifier</button>
                         </form>
-                        <form action="{% url 'delete_post' e.id%}" method="post">
+                        <form action="{% url 'delete_ticket' e.id%}" method="post">
                             {% csrf_token %}
                             <button class="style-button">Supprimer</button></div>
                     </form>

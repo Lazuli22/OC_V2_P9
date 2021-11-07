@@ -1,0 +1,25 @@
+<H1>Bienvenue sur le flux d'actualité</H1>
+
+<div class="container">
+    <div class="row">
+        <div class="box">
+            <div class="post-group">
+                {% for e in my_posts %}
+                <div class="post-group">
+                    <p style="font-style: italic;"> Ticket publié le {{e.time_created}}</p>
+                    <div style="font-weight: bold;">
+                        {{e.ticket}}
+                    </div>
+                    <p>
+                        {{e.description}}
+                    </p>
+                    <div>
+                        <img src="../media/{{e.image}}" class="img-responsive" style="width: 50%; height:50%;" />
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+</div>
