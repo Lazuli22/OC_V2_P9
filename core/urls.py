@@ -22,7 +22,6 @@ from core import views
 urlpatterns = [
     url('register/', views.register_request, name="register_request"),
     url('login/', views.login_request, name="login_request"),
-  #  url('save/', views.save_ticket, name="save_ticket"),
     url('update/(?P<post_id>.*)', views.update_ticket, name="update_ticket"),
     url('delete/(?P<post_id>.*)', views.delete_ticket, name="delete_ticket"),
     url('', views.posts, name="posts"),

@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %} {% block menu%} {%include 'core/menu.html'%} {% endblock%} {% block content %}
+<H1>Modifier une critique</H1>
+<div class=" form-group" style="flex-direction: column; ">
+    <label>Vous êtes en train de poster en réponse à </label>
+    <div class=" form-group" style="flex-direction: column; ">
+        <p style="font-style: italic;">
+            <div style="float: right;">le {{ticket_form.time_created}} </div>
+        </p>
+        <div style="font-weight: bold; font-size: x-large;">
+            {{ticket_form.ticket}}
+        </div>
+        <p>
+            {{ticket_form.description}}
+        </p>
+        <div>
+            <img src="/media/{{ticket_form.image}}" class="img-responsive" style="width: 50%; height:80%;" />
+        </div>
+
+    </div>
+</div>
+<form action="{% url 'review:update_review' id_review id_ticket %}" method="post">
+    {% csrf_token %}
+    <div class=" form-group " style="flex-direction: column;">
+        <label>Critique : </label>
+        <label for="titre " class="control-label "> Titre</label> {{ review_form.headline }}
+        <label for="note " class="control-label ">Note</label> {{ review_form.rating }}
+        <label for="commentaire" class="control-label ">commentaire  </label> {{ review_form.body}}
+    </div>
+
+    <button type="submit " class="style-button ">Envoyer</button>
+</form>
+{% endblock%}

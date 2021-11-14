@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %} {% block menu%} {%include 'core/menu.html'%} {% endblock%} {% block content %}
+<H1>Créer une critique</H1>
+<form action="{%url 'create_review' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class=" form-group" style="flex-direction: column; ">
+        <label>Article/ Livre : </label>
+        <label for="titre" class="control-label"> Titre</label> {{ ticket_form.ticket }}
+        <label for="description " class="control-label">Description</label> {{ ticket_form.description }}
+        <label for="image " class="control-label ">Image</label> {{ ticket_form.image }}
+    </div>
+
+    <div class=" form-group " style="flex-direction: column;">
+        <label>Critique : </label>
+        <label for="titre " class="control-label "> Titre</label> {{ review_form.headline }}
+        <label for="note " class="control-label ">Note</label> {{ review_form.rating }}
+        <label for="commentaire" class="control-label ">commentaire  </label> {{ review_form.body}}
+    </div>
+
+    <button type="submit " class="style-button ">Envoyer</button>
+</form>
+{% endblock%}

@@ -1,25 +1,76 @@
 <H1>Bienvenue sur le flux d'actualité</H1>
-
 <div class="container">
     <div class="row">
         <div class="box">
             <div class="post-group">
-                {% for e in my_posts %}
+                {% for e in posts_and_reviews %} {% if e.review == None %}
                 <div class="post-group">
-                    <p style="font-style: italic;"> Ticket publié le {{e.time_created}}</p>
-                    <div style="font-weight: bold;">
-                        {{e.ticket}}
+                    {% if e.post.user == user_logged %}
+                    <div style="font-size: small ;"> Vous avez demandé une critique </div>
+                    {%else%}
+                    <div style="font-size: small ;"> {{e.post.user}} a demandé une critique </div>
+                    {% endif %}
+                    <p style="font-style: italic;">
+                        <div style="float: right;">le {{e.post.time_created}} </div>
+                    </p>
+                    <div style="font-weight: bold; font-size: x-large;">
+                        {{e.post.ticket}}
                     </div>
                     <p>
-                        {{e.description}}
+                        {{e.post.description}}
                     </p>
                     <div>
-                        <img src="../media/{{e.image}}" class="img-responsive" style="width: 50%; height:50%;" />
+                        <img src="../media/{{e.post.image}}" class="img-responsive" style="width: 25%; height:25%;" />
+                    </div>
+                    <div style="display:flex; flex-direction:row-reverse;">
+                        <form style="margin-left: 10px; margin-right: 10px;" action="{% url 'review:create_review_post' e.post.id %}" method="get">
+                            {% csrf_token %}
+                            <button class="style-button ">Créer une critique</button>
+                        </form>
                     </div>
                 </div>
-                {% endfor %}
+                {%else%}
+                <div class="post-group " style="background-color: rgb(177, 170, 238); ">
+
+                    {% if e.review.user == user_logged %}
+                    <div style="font-size: small ; "> Vous avez posté une critique </div>
+                    <div style="display:flex; flex-direction:row-reverse;">
+                        <form style="margin-left: 10px; margin-right: 10px;" action="{% url 'review:update_review' e.review.id e.post.id %}" method="get">
+                            {% csrf_token %}
+                            <button class="style-button "> Modifier votre critique</button>
+                        </form>
+                    </div>
+                    {%else%}
+                    <div style="font-size: small ; "> {{e.review.user}} a posté une critique </div>
+
+                    {% endif %}
+
+                    <div style="font-weight: bold; font-size: x-large; ">
+                        {{e.review.headline}} - {{e.review.rating}}
+                    </div>
+                    <p style="font-style: italic; ">
+                        <div style="float: right; ">le {{e.review.time_created}} </div>
+                    </p>
+                    <p>
+                        {{e.review.body}}
+                    </p>
+
+                    <div class="post-group " style="background-color : white; ">
+                        <div style="font-size: x-small ; "> Ticket - {{e.post.user}}</div>
+                        <div style="font-weight: bold; font-size: x-large; ">
+                            {{e.post.ticket}}
+                        </div>
+                        <p>
+                            {{e.post.description}}
+                        </p>
+                        <div>
+                            <img src="../media/{{e.post.image}} " class="img-responsive " style="width: 25%; height:25%; " />
+                        </div>
+                    </div>
+                </div>
+                {%endif%}{% endfor %}
             </div>
+
         </div>
     </div>
-</div>
 </div>

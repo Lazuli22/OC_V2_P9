@@ -6,31 +6,32 @@
             <div class="post-group">
                 {% for e in my_posts %}
                 <div class="post-group">
-                    <p style="font-style: italic;">Vous avez publié un ticket le {{e.time_created}}</p>
-                    <div style="font-weight: bold;">
+                    <div style="font-style: italic;"> Vous avez demandé une critique </div>
+                    <div style="float: right;">le {{e.time_created}}</div>
+                    <div style="font-weight: bold; font-size: x-large;">
                         {{e.ticket}}
                     </div>
                     <p>
                         {{e.description}}
                     </p>
                     <div>
-                        <img src="../media/{{e.image}}" class="img-responsive" style="width: 100%; float: left; margin-right: 10px;" />
+                        <img src="../media/{{e.image}}" class="img-responsive" style="width: 50%; height:50%;" />
                     </div>
-                    <div style="float:right;">
-                        <form action="{% url 'update_ticket' e.id%}" method="get">
-                            {% csrf_token %}
-                            <button style="margin: 10px;" class="style-button">Modifier</button>
-                        </form>
+                    <div style="display:flex; flex-direction:row-reverse;">
+
                         <form action="{% url 'delete_ticket' e.id%}" method="post">
                             {% csrf_token %}
-                            <button class="style-button">Supprimer</button></div>
-                    </form>
-                    <div style="clear: right;"></div>
+                            <button class="style-button">Supprimer</button>
+                        </form>
+                        <form style="margin-left: 10px; margin-right: 10px;" action="{% url 'update_ticket' e.id%}" method="get">
+                            {% csrf_token %}
+                            <button class="style-button">Modifier</button>
+                        </form>
+                    </div>
                 </div>
                 {% endfor %}
             </div>
         </div>
     </div>
-</div>
 </div>
 {% endblock %}

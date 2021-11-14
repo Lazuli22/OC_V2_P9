@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+
+from review.models import Review
 from .forms import NewTicketForm, NewUserForm
 from django.contrib import auth
 from django.contrib.auth.forms import AuthenticationForm
@@ -7,15 +9,23 @@ from django.contrib import messages
 from core.models import Ticket
 
 
+# attention à ne filtrer les posts que de ceux que l'on suit
 def home(request):
     if(request.user.is_authenticated):
-        list_posts = []
+        list_posts_and_reviews = []
+        list_reviews = Review.objects.all()
         list_posts = Ticket.objects.all()
+        for p in list_posts:
+            for r in list_reviews:
+                if p.id == r.ticket_id:
+                    list_posts_and_reviews.append({"post": p, "review": r})
+            list_posts_and_reviews.append({"post": p, "review": None})
         return render(
             request=request,
             template_name="core/home.html",
             context={
-                    'my_posts': list_posts,
+                    'user_logged': request.user,
+                    'posts_and_reviews': list_posts_and_reviews
             }
         )
     else:
@@ -121,7 +131,7 @@ def delete_ticket(request, post_id):
         post_to_del.delete()
     return redirect("posts")
 
-
+#  Code à simplifier
 def update_ticket(request, post_id):
     post_to_modify = Ticket.objects.get(id=post_id)
     if request.method == "GET":

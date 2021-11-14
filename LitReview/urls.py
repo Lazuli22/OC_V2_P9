@@ -19,6 +19,7 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.conf import settings
 from core import views
+import review
 
 
 urlpatterns = [
@@ -28,6 +29,7 @@ urlpatterns = [
     url('ticket/', views.create_ticket, name="create_ticket"),
     url('posts/', include('core.urls')),
     url('userfollows/', include('userfollows.urls')),
+    url('review/', include('review.urls', namespace="review")),
     url('admin/', admin.site.urls),
 ]
 

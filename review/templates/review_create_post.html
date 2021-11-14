@@ -1,0 +1,34 @@
+{% extends 'core/base.html' %} {% block menu%} {%include 'core/menu.html'%} {% endblock%} {% block content %}
+<H1>Créer une critique</H1>
+
+
+<div class=" form-group" style="flex-direction: column; ">
+    <label>Vous êtes en train de poster en réponse à </label>
+    <div class=" form-group" style="flex-direction: column; ">
+        {% for e in ticket_form %}
+        <p style="font-style: italic;">
+            <div style="float: right;">le {{e.time_created}} </div>
+        </p>
+        <div style="font-weight: bold; font-size: x-large;">
+            {{e.ticket}}
+        </div>
+        <p>
+            {{e.description}}
+        </p>
+        <div>
+            <img src="/media/{{e.image}}" class="img-responsive" style="width: 50%; height:80%;" />
+        </div>
+        {% endfor%}
+    </div>
+</div>
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class=" form-group " style="flex-direction: column;">
+        <label>Critique : </label>
+        <label for="titre " class="control-label "> Titre</label> {{ review_form.headline }}
+        <label for="note " class="control-label ">Note</label> {{ review_form.rating }}
+        <label for="commentaire" class="control-label ">commentaire  </label> {{ review_form.body}}
+    </div>
+    <button type="submit " class="style-button ">Envoyer</button>
+</form>
+{% endblock%}
