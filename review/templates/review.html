@@ -1,6 +1,6 @@
 {% extends 'core/base.html' %} {% block menu%} {%include 'core/menu.html'%} {% endblock%} {% block content %}
 <H1>Créer une critique</H1>
-<form action="{%url 'create_review' %}" method="post" enctype="multipart/form-data">
+<form action="{%url 'review:create_review' %}" method="post" enctype="multipart/form-data" class="form-review">
     {% csrf_token %}
     <div class=" form-group" style="flex-direction: column; ">
         <label>Article/ Livre : </label>
@@ -12,7 +12,16 @@
     <div class=" form-group " style="flex-direction: column;">
         <label>Critique : </label>
         <label for="titre " class="control-label "> Titre</label> {{ review_form.headline }}
-        <label for="note " class="control-label ">Note</label> {{ review_form.rating }}
+        <br>
+        <label for="note " class="control-label ">Note : 
+        <button type='submit' class="fa fa-star fa-2x " id="first"></button>
+        <button type='submit' class="fa fa-star fa-2x " id="second"></button>
+        <button type='submit' class="fa fa-star fa-2x " id="third"></button>
+        <button type='submit' class="fa fa-star fa-2x" id="fourth"></button>
+        <button type='submit' class="fa fa-star fa-2x" id="fifth"></button>
+        </label>
+        <div id="confirm_box"></div> {{review_form.rating}}
+        <br>
         <label for="commentaire" class="control-label ">commentaire  </label> {{ review_form.body}}
     </div>
 

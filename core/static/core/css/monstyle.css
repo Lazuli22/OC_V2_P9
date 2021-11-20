@@ -161,3 +161,7 @@ td {
     border: solid rgb(184, 171, 241);
     border-radius: 5%;
 }
+
+.checked {
+    color: orange;
+}

@@ -36,6 +36,7 @@ def create_review_post(request, id_post):
                 request=request,
                 template_name="review_create_post.html",
                 context={
+                    "ticket_form_id": ticket[0].id,
                     "ticket_form": ticket,
                     "review_form": review_form}
             )
@@ -43,7 +44,7 @@ def create_review_post(request, id_post):
         review_form = NewReviewForm(request.POST)
         if review_form.is_valid():
             user = User.objects.filter(username=request.user)
-            review_form.save(user=user[0], ticket=ticket[0])
+            review_form.save(review=None, user=user[0], ticket=ticket[0])
         return redirect("home")
 
 
