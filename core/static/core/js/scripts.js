@@ -11,7 +11,6 @@ const form = document.querySelector('.form-review')
 const confirmbox = document.getElementById('confirm_box')
 const csrf = document.getElementsByName('csrfmiddlewaretoken')
 
-console.log(form)
 console.log(confirmbox)
 console.log(csrf)
 
@@ -64,6 +63,24 @@ const handleSelect = (selection) => {
     }
 }
 
+const getNumericValue = (stringValue) => {
+    let numericValue;
+    if (stringValue === 'first') {
+        numericValue = 1
+    } else if (stringValue === 'second') {
+        numericValue = 2
+    } else if (stringValue === 'third') {
+        numericValue = 3
+    } else if (stringValue === 'fourth') {
+        numericValue = 4
+    } else if (stringValue === 'fifth') {
+        numericValue = 5
+    } else {
+        numericValue = 0
+    }
+    return numericValue
+}
+
 const arr = [one, two, three, four, five]
 
 arr.forEach(item => item.addEventListener('mouseover', (event) => {
@@ -71,13 +88,6 @@ arr.forEach(item => item.addEventListener('mouseover', (event) => {
 }))
 
 arr.forEach(item => item.addEventListener('click', (event) => {
-    const val = event.target.id
-    console.log(val)
-
-    form.addEventListener('submit', e => {
-        e.preventDefault()
-        const id = e.target.id
-        console.log(id)
-    })
-
+    const val = getNumericValue(event.target.id)
+    document.getElementById('confirm_box').innerHTML = `<input id="rating" name="rating" type="hidden" value="${val}">`
 }))

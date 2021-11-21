@@ -8,11 +8,14 @@ from .forms import NewReviewForm
 def create_review(request):
     if request.method == "POST":
         ticket_form = NewTicketForm(request.POST, request.FILES)
+        score = request.POST.get("rating")
+        print(score)
         review_form = NewReviewForm(request.POST)
+        print(review_form)
         if ticket_form.is_valid() and review_form.is_valid():
             ticket = ticket_form.save(request.user.id)
             user = User.objects.filter(username=request.user)
-            review_form.save(user=user[0], ticket=ticket)
+            review_form.save(review_id=None, user=user[0], ticket=ticket)
         return redirect("home")
     else:
         ticket_form = NewTicketForm()
@@ -42,8 +45,12 @@ def create_review_post(request, id_post):
             )
     else:
         review_form = NewReviewForm(request.POST)
+        score = request.POST.get('val')
+        print(score)
+        review_form.rating = score
         if review_form.is_valid():
             user = User.objects.filter(username=request.user)
+            print(score)
             review_form.save(review=None, user=user[0], ticket=ticket[0])
         return redirect("home")
 
