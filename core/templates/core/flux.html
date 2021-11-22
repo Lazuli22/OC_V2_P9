@@ -43,12 +43,53 @@
                     </div>
                     {%else%}
                     <div style="font-size: small ; "> {{e.review.user}} a posté une critique </div>
-
                     {% endif %}
-
                     <div style="font-weight: bold; font-size: x-large; ">
-                        {{e.review.headline}} - {{e.review.rating}}
+                        {{e.review.headline}} - {%if e.review.rating == 0 %}
+                        <label for="note" class="control-label" id=star>
+                            <span class="fa fa-star fa-x" id="first_show"></span>
+                            <span class="fa fa-star fa-x" id="second_show"></span>
+                            <span class="fa fa-star fa-x" id="third_show"></span>
+                            <span class="fa fa-star fa-x" id="fourth_show"></span>
+                            <span class="fa fa-star fa-x" id="fifth_show"></span>
+                        </label> {%else%} {%if e.review.rating == 1 %}
+                        <label for="note" class="control-label" id=star>
+                            <span class="fa fa-star fa-x checked" id="first_show"></span>
+                            <span class="fa fa-star fa-x" id="second_show"></span>
+                            <span class="fa fa-star fa-x" id="third_show"></span>
+                            <span class="fa fa-star fa-x" id="fourth_show"></span>
+                            <span class="fa fa-star fa-x" id="fifth_show"></span>
+                        </label> {%else%} {% if e.review.rating == 2 %}
+                        <label for="note" class="control-label" id=star>
+                            <span class="fa fa-star fa-x checked" id="first_show"></span>
+                            <span class="fa fa-star fa-x checked" id="second_show"></span>
+                            <span class="fa fa-star fa-x" id="third_show"></span>
+                            <span class="fa fa-star fa-x" id="fourth_show"></span>
+                            <span class="fa fa-star fa-x" id="fifth_show"></span>
+                        </label> {%else%} {% if e.review.rating == 3 %}
+                        <label for="note" class="control-label" id=star>
+                            <span class="fa fa-star fa-x checked" id="first_show"></span>
+                            <span class="fa fa-star fa-x checked" id="second_show"></span>
+                            <span class="fa fa-star fa-x checked" id="third_show"></span>
+                            <span class="fa fa-star fa-x" id="fourth_show"></span>
+                            <span class="fa fa-star fa-x" id="fifth_show"></span>
+                        </label> {%else%} {%if e.review.rating == 4 %}
+                        <label for="note" class="control-label" id=star>
+                            <span class="fa fa-star fa-x checked" id="first_show"></span>
+                            <span class="fa fa-star fa-x checked" id="second_show"></span>
+                            <span class="fa fa-star fa-x checked" id="third_show"></span>
+                            <span class="fa fa-star fa-x checked" id="fourth_show"></span>
+                            <span class="fa fa-star fa-x" id="fifth_show"></span>
+                        </label> {%else%} {%if e.review.rating == 5 %}
+                        <label for="note" class="control-label" id=star>
+                            <span class="fa fa-star fa-x checked" id="first_show"></span>
+                            <span class="fa fa-star fa-x checked" id="second_show"></span>
+                            <span class="fa fa-star fa-x checked" id="third_show"></span>
+                            <span class="fa fa-star fa-x checked" id="fourth_show"></span>
+                            <span class="fa fa-star fa-x checked" id="fifth_show"></span>
+                        </label> {%endif%}{%endif%} {%endif%}{% endif%} {%endif%} {%endif%}
                     </div>
+
                     <p style="font-style: italic; ">
                         <div style="float: right; ">le {{e.review.time_created}} </div>
                     </p>

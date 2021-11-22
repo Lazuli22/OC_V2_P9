@@ -8,10 +8,7 @@ from .forms import NewReviewForm
 def create_review(request):
     if request.method == "POST":
         ticket_form = NewTicketForm(request.POST, request.FILES)
-        score = request.POST.get("rating")
-        print(score)
         review_form = NewReviewForm(request.POST)
-        print(review_form)
         if ticket_form.is_valid() and review_form.is_valid():
             ticket = ticket_form.save(request.user.id)
             user = User.objects.filter(username=request.user)

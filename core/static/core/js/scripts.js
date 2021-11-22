@@ -9,10 +9,7 @@ const five = document.getElementById('fifth')
 
 const form = document.querySelector('.form-review')
 const confirmbox = document.getElementById('confirm_box')
-const csrf = document.getElementsByName('csrfmiddlewaretoken')
 
-console.log(confirmbox)
-console.log(csrf)
 
 const handleSelect = (selection) => {
     switch (selection) {
@@ -62,6 +59,8 @@ const handleSelect = (selection) => {
             }
     }
 }
+
+
 
 const getNumericValue = (stringValue) => {
     let numericValue;
