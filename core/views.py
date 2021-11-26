@@ -1,25 +1,34 @@
 from django.shortcuts import render, redirect
-
-from review.models import Review
-from .forms import NewTicketForm, NewUserForm
 from django.contrib import auth
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from core.models import Ticket
+from review.models import Review
+from userfollows.models import UserFollows
+from .forms import NewTicketForm, NewUserForm
+from django.shortcuts import get_list_or_404
 
 
 # attention à ne filtrer les posts que de ceux que l'on suit
+
 def home(request):
     if(request.user.is_authenticated):
         list_posts_and_reviews = []
+        list_users_followed = get_list_or_404(
+            UserFollows, user_id=request.user.id)
         list_reviews = Review.objects.all()
         list_posts = Ticket.objects.all()
+        print(list_posts.__len__())
         for p in list_posts:
-            for r in list_reviews:
-                if p.id == r.ticket_id:
-                    list_posts_and_reviews.append({"post": p, "review": r})
-            list_posts_and_reviews.append({"post": p, "review": None})
+            if p.user_id == request.user.id:
+                list_posts_and_reviews.append({"post": p, "review": None})
+            for e in list_users_followed:
+                if p.user_id == e.followed_user_id:
+                    list_posts_and_reviews.append({"post": p, "review": None})
+                for r in list_reviews:
+                    if p.id == r.ticket_id and (r.user_id == request.user.id or r.user_id == e.followed_user_id):
+                        list_posts_and_reviews.append({"post": p, "review": r})
         return render(
             request=request,
             template_name="core/home.html",
@@ -83,7 +92,7 @@ def connection(request):
         return render(
             request=request,
             template_name="core/index.html",
-            context={ 
+            context={
                     "register_form": register_form,
                     "login_form": login_form
                     }
@@ -131,7 +140,7 @@ def delete_ticket(request, post_id):
         post_to_del.delete()
     return redirect("posts")
 
-#  Code à simplifier
+
 def update_ticket(request, post_id):
     post_to_modify = Ticket.objects.get(id=post_id)
     if request.method == "GET":
@@ -146,7 +155,7 @@ def update_ticket(request, post_id):
             "ticket": post_to_modify.ticket,
             "description": post_to_modify.description,
             "image": post_to_modify.image})
-        if ticket_form.is_valid():             
+        if ticket_form.is_valid():
             post_to_modify.ticket = ticket_form.cleaned_data.get("ticket")
             post_to_modify.description = ticket_form.cleaned_data.get("description")
             post_to_modify.image = ticket_form.cleaned_data.get("image")

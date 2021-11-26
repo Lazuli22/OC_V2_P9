@@ -28,13 +28,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# Page d'authentification 
+# Page d'authentification
 
 LOGIN_REDIRECT_URL = '/home'
 
 
 # Application definition
-# Créer une autre application userfollow 
+# Créer une autre application userfollow
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -87,11 +87,11 @@ WSGI_APPLICATION = 'LitReview.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql', 
+        'ENGINE': 'django.db.backends.postgresql',
         # on utilise l'adaptateur postgresql
-        'NAME': 'litreview', 
+        'NAME': 'litreview',
         # le nom de notre base de donnees creee precedemment
-        'USER': 'ddiaz', 
+        'USER': 'ddiaz',
         # attention : remplacez par votre nom d'utilisateur
         'PASSWORD': 'Lolita',
         'HOST': '',

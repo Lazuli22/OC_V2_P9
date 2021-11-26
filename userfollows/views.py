@@ -20,7 +20,7 @@ def listing(request):
         id_user = e.followed_user_id
         followedUserObj.append(User.objects.get(id=id_user).username)
     context["followedUserObj"] = followedUserObj
-    followers = UserFollows.objects.filter(followed_user_id=request.user)   
+    followers = UserFollows.objects.filter(followed_user_id=request.user)
     followersObj = []
     for e in followers:
         id_user = e.user_id
@@ -38,7 +38,7 @@ def search(request):
             user_chosen = User.objects.get(username=option_value[0])
             context["user_chosen"] = user_chosen
             b = UserFollows(user=request.user, followed_user=user_chosen)
-            b.save()    
+            b.save()
     return listing(request)
 
 
@@ -49,4 +49,3 @@ def unsubscribe(request, username):
         )
     userFollowstoDel.delete()
     return listing(request)
-    
