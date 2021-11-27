@@ -48,7 +48,7 @@ def create_review_post(request, id_post):
         if review_form.is_valid():
             user = User.objects.filter(username=request.user)
             print(score)
-            review_form.save(review=None, user=user[0], ticket=ticket[0])
+            review_form.save(user=user[0], ticket=ticket[0], review_id=None)
         return redirect("home")
 
 

@@ -26,7 +26,16 @@
     <div class=" form-group " style="flex-direction: column;">
         <label>Critique : </label>
         <label for="titre " class="control-label "> Titre</label> {{ review_form.headline }}
-        <label for="note " class="control-label ">Note</label> {{ review_form.rating }}
+        <br>
+        <label for="note " class="control-label ">Note : 
+        <span class="fa fa-star fa-2x " id="first"></span>
+        <span class="fa fa-star fa-2x " id="second"></span>
+        <span class="fa fa-star fa-2x " id="third"></span>
+        <span class="fa fa-star fa-2x" id="fourth"></span>
+        <span class="fa fa-star fa-2x" id="fifth"></span>
+        </label>
+        <div id="confirm_box"></div>
+        <br>
         <label for="commentaire" class="control-label ">commentaire  </label> {{ review_form.body}}
     </div>
     <button type="submit " class="style-button ">Envoyer</button>

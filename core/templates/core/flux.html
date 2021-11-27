@@ -23,12 +23,17 @@
                     <div>
                         <img src="../media/{{e.post.image}}" class="img-responsive" style="width: 25%; height:25%;" />
                     </div>
+                    {%if e.has_one == 1%}
+                    <div style="display:flex; flex-direction:row-reverse;">
+                    </div>
+                    {%else%}
                     <div style="display:flex; flex-direction:row-reverse;">
                         <form style="margin-left: 10px; margin-right: 10px;" action="{% url 'review:create_review_post' e.post.id %}" method="get">
                             {% csrf_token %}
                             <button class="style-button ">Créer une critique</button>
                         </form>
                     </div>
+                    {%endif%}
                 </div>
                 {%else%}
                 <div class="post-group " style="background-color: rgb(177, 170, 238); ">

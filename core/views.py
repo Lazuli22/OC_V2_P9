@@ -21,14 +21,16 @@ def home(request):
         list_posts = Ticket.objects.all()
         print(list_posts.__len__())
         for p in list_posts:
-            if p.user_id == request.user.id:
-                list_posts_and_reviews.append({"post": p, "review": None})
             for e in list_users_followed:
-                if p.user_id == e.followed_user_id:
-                    list_posts_and_reviews.append({"post": p, "review": None})
                 for r in list_reviews:
-                    if p.id == r.ticket_id and (r.user_id == request.user.id or r.user_id == e.followed_user_id):
-                        list_posts_and_reviews.append({"post": p, "review": r})
+                    if p.id == r.ticket_id and (r.user_id == request.user.id
+                                                or r.user_id == e.followed_user_id
+                                                or p.user_id == request.user.id
+                                                or p.user_id == e.followed_user_id):
+                        list_posts_and_reviews.append({"post": p, "review": None, "has_one": 1})
+                        list_posts_and_reviews.append({"post": p, "review": r, "has_one": 1})
+            if p.user_id == request.user.id:
+                list_posts_and_reviews.append({"post": p, "review": None, "has_one": 0})
         return render(
             request=request,
             template_name="core/home.html",
