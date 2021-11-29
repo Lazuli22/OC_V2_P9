@@ -52,17 +52,17 @@ def create_review_post(request, id_post):
         return redirect("home")
 
 
-def update_review(request, **args):
-    review_toUpdate = Review.objects.get(id=args["id_review"])
-    post_reviewed = Ticket.objects.get(id=args["id_post"])
+def update_review(request, id_review, id_post):
+    review_toUpdate = Review.objects.get(id=id_review)
+    post_reviewed = Ticket.objects.get(id=id_post)
     if request.method == "GET":
         review_form = NewReviewForm(instance=review_toUpdate)
         return render(
                 request=request,
                 template_name="update_review.html",
                 context={
+                    "id_post": post_reviewed.id,
                     "id_review": review_toUpdate.id,
-                    "id_ticket": post_reviewed.id,
                     "review_form": review_form,
                     "ticket_form": post_reviewed
                     }
@@ -74,7 +74,7 @@ def update_review(request, **args):
             review_toUpdate.headline = review_form.cleaned_data.get("headline")
             review_toUpdate.body = review_form.cleaned_data.get("body")
             review_toUpdate.rating = review_form.cleaned_data.get("rating")
-            review_toUpdate.ticket_id = args["id_post"]
+            review_toUpdate.ticket_id = id_post
             review_toUpdate.user_id = user[0].id
             review_toUpdate.save()
         return redirect("home")

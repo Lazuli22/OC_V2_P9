@@ -15,22 +15,37 @@ from django.shortcuts import get_list_or_404
 def home(request):
     if(request.user.is_authenticated):
         list_posts_and_reviews = []
+        list_id_posts = []
+        l_post_and_rev = []
         list_users_followed = get_list_or_404(
             UserFollows, user_id=request.user.id)
         list_reviews = Review.objects.all()
         list_posts = Ticket.objects.all()
-        print(list_posts.__len__())
+        for r in list_reviews:
+            p = Ticket.objects.filter(id=r.ticket_id)
+            list_id_posts.append(p[0].id)
+            l_post_and_rev.append({"post": p[0], "review": r, "has_one": 1})
         for p in list_posts:
+            print(p)
+            if p.id in list_id_posts:
+                print(p.id)
+                l_post_and_rev.append({"post": p, "review": None, "has_one": 1})
+            else:
+                l_post_and_rev.append({"post": p, "review": None, "has_one": 0})
+        for el in l_post_and_rev:
+            print(el)
+            if el["post"].user_id == request.user.id:
+                list_posts_and_reviews.append(el)
+            elif el["review"] is not None:
+                if el['review'].user_id == request.user.id:
+                    list_posts_and_reviews.append(el)
             for e in list_users_followed:
-                for r in list_reviews:
-                    if p.id == r.ticket_id and (r.user_id == request.user.id
-                                                or r.user_id == e.followed_user_id
-                                                or p.user_id == request.user.id
-                                                or p.user_id == e.followed_user_id):
-                        list_posts_and_reviews.append({"post": p, "review": None, "has_one": 1})
-                        list_posts_and_reviews.append({"post": p, "review": r, "has_one": 1})
-            if p.user_id == request.user.id:
-                list_posts_and_reviews.append({"post": p, "review": None, "has_one": 0})
+                if el["post"].user_id == e.followed_user_id:
+                    list_posts_and_reviews.append(el)
+                elif el["review"] is not None:
+                    if (el["review"].user_id == e.followed_user_id):
+                        list_posts_and_reviews.append(el)
+        print(list_posts_and_reviews.__len__())
         return render(
             request=request,
             template_name="core/home.html",
