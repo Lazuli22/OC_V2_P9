@@ -2,8 +2,16 @@ from django.forms import ModelForm
 from .models import Review
 
 
-# ReviewForm
 class NewReviewForm(ModelForm):
+    """
+        A class to represent a form for a new review
+
+        Attributes
+        ----------
+        healdine :str
+        body : str
+        rating : str
+    """
     class Meta:
         model = Review
         fields = [

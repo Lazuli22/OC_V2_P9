@@ -5,6 +5,21 @@ from core.models import User
 
 
 class Review(models.Model):
+    """
+    A class to represent a review
+        ticket : foreigner key
+            a id of ticket/post
+        rating : float
+            a rating linked to a review
+        user : foreigner key
+            a id of review's author
+        headline : str
+            a headline of a review
+        body : str
+            a body of a review
+        time_created :
+            the time when the review is created
+    """
     ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE)
     rating = models.PositiveSmallIntegerField(
         # validates that rating must be between 0 and 5

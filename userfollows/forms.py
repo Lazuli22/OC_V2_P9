@@ -4,7 +4,16 @@ from userfollows.models import UserFollows
 
 
 class UserForm(forms.Form):
+    """
+        A class to represent a form for a Userfollow
+        Attributes
+        ----------
+        username :str
+        email : str
+        password1 : str
+        password2 : str
 
+    """
     def __init__(self, *args, **kwargs):
         self.user = kwargs["user"]
         del kwargs["user"]
@@ -14,9 +23,9 @@ class UserForm(forms.Form):
             queryset=self.get_users_list())
 
     def get_users_list(self):
-        fe = UserFollows.objects.filter(user=self.user) 
+        fe = UserFollows.objects.filter(user=self.user)
         return (User.objects.all().order_by("username")
                 .exclude(pk=self.user.id)
                 .exclude(
-                    pk__in=[User.objects.get(id=e.followed_user_id).id for e in fe] 
+                    pk__in=[User.objects.get(id=e.followed_user_id).id for e in fe]
                 ))

@@ -4,8 +4,18 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Ticket, User
 
 
-# USerForm
 class NewUserForm(UserCreationForm):
+    """
+        A class to represent a form for a new person
+
+        Attributes
+        ----------
+        username :str
+        email : str
+        password1 : str
+        password2 : str
+
+    """
     email = forms.EmailField(required=True)
 
     class Meta:
@@ -25,8 +35,20 @@ class NewUserForm(UserCreationForm):
         return user
 
 
-# TicketForm
 class NewTicketForm(ModelForm):
+    """
+        A class to represent a form for a new ticket
+
+        Attributes
+        ----------
+        ticket :str
+            name of ticket
+        description : str
+            description of ticket
+        image : im
+            picture of ticket
+
+    """
     class Meta:
         model = Ticket
         fields = [

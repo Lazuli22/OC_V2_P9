@@ -3,6 +3,14 @@ from core.models import User
 
 
 class UserFollows(models.Model):
+    """
+        A class to represent new userFollow
+
+        Attributes
+        ----------
+        to :Foreign key to User
+        followed_user : Foreign key to Followed user
+    """
     user = models.ForeignKey(
         to=User,
         on_delete=models.CASCADE,
@@ -17,4 +25,3 @@ class UserFollows(models.Model):
         # ensures we don't get multiple UserFollows instances
         # for unique user-user_followed pairs
         unique_together = ('user', 'followed_user', )
-

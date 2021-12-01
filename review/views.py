@@ -6,6 +6,15 @@ from .forms import NewReviewForm
 
 
 def create_review(request):
+    """
+        creates a review
+    Parameter :
+        request : HTTPrequest
+    Returns :
+        context : Httrrequest
+        context : Dict
+        template : HTML page
+    """
     if request.method == "POST":
         ticket_form = NewTicketForm(request.POST, request.FILES)
         review_form = NewReviewForm(request.POST)
@@ -27,8 +36,18 @@ def create_review(request):
         )
 
 
-# Comment est ce que je peux mutualiser les 2 méthodes...
 def create_review_post(request, id_post):
+    """
+    create a review linked a post
+    Parameter :
+        request : HTTPrequest
+        id_post : str
+            the id of the post
+    Returns :
+        context : Httprequest
+        context : Dict
+        template : HTML page
+    """
     ticket = Ticket.objects.filter(id=id_post)
     if request.method == "GET":
         review_form = NewReviewForm()
@@ -53,6 +72,19 @@ def create_review_post(request, id_post):
 
 
 def update_review(request, id_review, id_post):
+    """
+    update a review linked a post
+    Parameter :
+        request : HTTPrequest
+        id_post : str
+            the id of the post
+        id_review : str
+            the id og the review
+    Returns :
+        context : Httrrequest
+        context : Dict
+        template : HTML page
+    """
     review_toUpdate = Review.objects.get(id=id_review)
     post_reviewed = Ticket.objects.get(id=id_post)
     if request.method == "GET":

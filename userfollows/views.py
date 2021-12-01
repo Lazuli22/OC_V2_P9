@@ -9,6 +9,15 @@ from .forms import UserForm
 
 
 def listing(request):
+    """
+    shows a list of followed user
+    Parameter :
+        request : HTTPrequest
+    Returns :
+        template : HTML page
+        context : Dict
+        page : HTMLpage
+    """
     if request.method == "POST":
         form = UserForm(request.POST, user=request.user)
     else:
@@ -30,6 +39,13 @@ def listing(request):
 
 
 def search(request):
+    """
+    shows a search function
+    Parameter :
+        request : HTTPrequest
+    Returns :
+        template : HTML page
+    """
     if request.method == "POST":
         form = UserForm(request.POST, user=request.user)
         context = {"form": form}
@@ -43,6 +59,15 @@ def search(request):
 
 
 def unsubscribe(request, username):
+    """
+    unsubscribe a followed user
+    Parameter :
+        request : HTTPrequest
+    Returns :
+        template : HTML page
+        context : Dict
+        page : HTMLpage
+    """
     userTodel = User.objects.get(username=username)
     userFollowstoDel = UserFollows.objects.get(
         followed_user_id=userTodel.id, user_id=request.user.id

@@ -10,9 +10,18 @@ from .forms import NewTicketForm, NewUserForm
 from django.shortcuts import get_list_or_404
 
 
-# attention à ne filtrer les posts que de ceux que l'on suit
-
 def home(request):
+    """
+    returns the main posts and reviews of the user and users followed.
+
+    Parameter :
+        request : HTTPrequest
+    Returns :
+        request : HTTPrequest
+        context : Dict
+        template : HTML page
+
+    """
     if(request.user.is_authenticated):
         list_posts_and_reviews = []
         list_id_posts = []
@@ -59,6 +68,15 @@ def home(request):
 
 
 def register_request(request):
+    """
+    creates a new user
+    Parameter :
+        request : HTTPrequest
+    Returns :
+        request : HTTPrequest
+        context : Dict
+        template : HTML page
+    """
     if request.method == "POST":
         register_form = NewUserForm(request.POST)
         if register_form.is_valid():
@@ -78,6 +96,16 @@ def register_request(request):
 
 
 def login_request(request):
+    """
+    login a user
+    Parameter :
+        request : HTTPrequest
+    Returns :
+        request : HTTPrequest
+        context : Dict
+        template : HTML page
+
+    """
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
@@ -101,6 +129,15 @@ def login_request(request):
 
 
 def connection(request):
+    """
+    authenticate an user
+    Parameter :
+        request : HTTPrequest
+    Returns :
+        request : HTTPrequest
+        context : Dict
+        template : HTML page
+    """
     if(request.user.is_authenticated):
         return redirect("home")
     else:
@@ -117,12 +154,28 @@ def connection(request):
 
 
 def logout(request):
+    """
+    logout an user
+    Parameter :
+        request : HTTPrequest
+    Returns :
+        request : HTTPrequest
+    """
     if(request is not None):
         auth.logout(request)
     return redirect("connection")
 
 
 def create_ticket(request):
+    """
+    creates a ticket or post
+    Parameter :
+        request : HTTPrequest
+    Returns :
+        request : HTTPrequest
+        context : Dict
+        template : HTML page
+    """
     if request.method == "POST":
         ticket_form = NewTicketForm(request.POST, request.FILES)
         if ticket_form.is_valid():
@@ -137,6 +190,15 @@ def create_ticket(request):
 
 
 def posts(request):
+    """
+    shows list of user's posts
+    Parameter :
+        request : HTTPrequest
+    Returns :
+        request : HTTPrequest
+        context : Dict
+        template : HTML page
+    """
     if(request.user.is_authenticated):
         list_posts = []
         list_posts = Ticket.objects.filter(user_id=request.user.id)
@@ -151,6 +213,15 @@ def posts(request):
 
 
 def delete_ticket(request, post_id):
+    """
+    delete a post or ticket
+    Parameter :
+        request : HTTPrequest
+        post_id : str
+            the id of the post
+    Returns :
+        template : HTML page
+    """
     post_to_del = Ticket.objects.get(id=post_id)
     post_to_id = post_to_del.user
     if(post_to_id == request.user):
@@ -159,6 +230,15 @@ def delete_ticket(request, post_id):
 
 
 def update_ticket(request, post_id):
+    """
+    update a post or a ticket
+    Parameter :
+        request : HTTPrequest
+        post_id : str
+            the id of the post
+    Returns :
+        template : HTML page
+    """
     post_to_modify = Ticket.objects.get(id=post_id)
     if request.method == "GET":
         ticket_form = NewTicketForm(instance=post_to_modify)
