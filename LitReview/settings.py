@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'LitReview.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+   'default': {
         'ENGINE': 'django.db.backends.postgresql',
         # on utilise l'adaptateur postgresql
         'NAME': 'litreview',
@@ -98,6 +98,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

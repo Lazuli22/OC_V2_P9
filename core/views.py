@@ -7,7 +7,6 @@ from core.models import Ticket
 from review.models import Review
 from userfollows.models import UserFollows
 from .forms import NewTicketForm, NewUserForm
-from django.shortcuts import get_list_or_404
 
 
 def home(request):
@@ -26,8 +25,7 @@ def home(request):
         list_posts_and_reviews = []
         list_id_posts = []
         l_post_and_rev = []
-        list_users_followed = get_list_or_404(
-            UserFollows, user_id=request.user.id)
+        list_users_followed = UserFollows.objects.filter(user_id=request.user.id)
         list_reviews = Review.objects.all()
         list_posts = Ticket.objects.all()
         for r in list_reviews:
@@ -35,12 +33,11 @@ def home(request):
             list_id_posts.append(p[0].id)
             l_post_and_rev.append({"post": p[0], "review": r, "has_one": 1})
         for p in list_posts:
-            print(p)
             if p.id in list_id_posts:
-                print(p.id)
                 l_post_and_rev.append({"post": p, "review": None, "has_one": 1})
             else:
                 l_post_and_rev.append({"post": p, "review": None, "has_one": 0})
+        print(l_post_and_rev.__len__())
         for el in l_post_and_rev:
             print(el)
             if el["post"].user_id == request.user.id:
@@ -48,19 +45,20 @@ def home(request):
             elif el["review"] is not None:
                 if el['review'].user_id == request.user.id:
                     list_posts_and_reviews.append(el)
-            for e in list_users_followed:
-                if el["post"].user_id == e.followed_user_id:
-                    list_posts_and_reviews.append(el)
-                elif el["review"] is not None:
-                    if (el["review"].user_id == e.followed_user_id):
+            if list_users_followed is not None:
+                for e in list_users_followed:
+                    if el["post"].user_id == e.followed_user_id and el not in list_posts_and_reviews:
                         list_posts_and_reviews.append(el)
-        print(list_posts_and_reviews.__len__())
+                    elif el["review"] is not None:
+                        if (el["review"].user_id == e.followed_user_id and el not in list_posts_and_reviews):
+                            list_posts_and_reviews.append(el)
+            print(list_posts_and_reviews.__len__())
         return render(
             request=request,
             template_name="core/home.html",
             context={
-                    'user_logged': request.user,
-                    'posts_and_reviews': list_posts_and_reviews
+                'user_logged': request.user,
+                'posts_and_reviews': list_posts_and_reviews
             }
         )
     else:
@@ -80,7 +78,7 @@ def register_request(request):
     if request.method == "POST":
         register_form = NewUserForm(request.POST)
         if register_form.is_valid():
-            user = register_form.save(request.user.id)
+            user = register_form.save(request.POST)
             login(request, user)
             messages.success(request, "Registration successful.")
         return redirect("home")
