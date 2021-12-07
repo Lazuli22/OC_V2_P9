@@ -14,17 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf.urls.static import static
-from django.conf.urls import url
+from django.urls import path
 from django.conf import settings
 from core import views
 
 
 urlpatterns = [
-    url('register/', views.register_request, name="register_request"),
-    url('login/', views.login_request, name="login_request"),
-    url('update/(?P<post_id>.*)', views.update_ticket, name="update_ticket"),
-    url('delete/(?P<post_id>.*)', views.delete_ticket, name="delete_ticket"),
-    url('', views.posts, name="posts"),
+    path('register/', views.register_request, name="register_request"),
+    path('login/', views.login_request, name="login_request"),
+    path('update/(?P<post_id>.*)', views.update_ticket, name="update_ticket"),
+    path('delete/(?P<post_id>.*)', views.delete_ticket, name="delete_ticket"),
+    path('', views.posts, name="posts"),
 ]
 
 if settings.DEBUG:

@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import include, url
+from django.conf.urls import include
 from django.conf.urls.static import static
 from django.conf import settings
 from core import views
@@ -25,11 +25,11 @@ urlpatterns = [
     path('', views.connection, name="connection"),
     path('logout/', views.logout, name="logout"),
     path('home/', views.home, name="home"),
-    url('ticket/', views.create_ticket, name="create_ticket"),
-    url('posts/', include('core.urls')),
-    url('userfollows/', include('userfollows.urls')),
-    url('review/', include('review.urls', namespace="review")),
-    url('admin/', admin.site.urls),
+    path('ticket/', views.create_ticket, name="create_ticket"),
+    path('posts/', include('core.urls')),
+    path('userfollows/', include('userfollows.urls')),
+    path('review/', include('review.urls', namespace="review")),
+    path('admin/', admin.site.urls),
 ]
 
 urlpatterns += static(
