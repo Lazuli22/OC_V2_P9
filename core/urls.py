@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf.urls.static import static
-from django.urls import path
+from django.urls import path, re_path
 from django.conf import settings
 from core import views
 
@@ -22,8 +22,8 @@ from core import views
 urlpatterns = [
     path('register/', views.register_request, name="register_request"),
     path('login/', views.login_request, name="login_request"),
-    path('update/(?P<post_id>.*)', views.update_ticket, name="update_ticket"),
-    path('delete/(?P<post_id>.*)', views.delete_ticket, name="delete_ticket"),
+    re_path('update/(?P<post_id>.*)', views.update_ticket, name="update_ticket"),
+    re_path('delete/(?P<post_id>.*)', views.delete_ticket, name="delete_ticket"),
     path('', views.posts, name="posts"),
 ]
 
