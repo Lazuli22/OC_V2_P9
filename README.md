@@ -36,7 +36,7 @@ Utilisation du fichier requirements.txt en vue de créer l'environnement des lib
     *  Pour Windows :
     ` cd C:/Users/user/OC_V2_P9`
 * pour le créer, lancer la commande : 
-    `python -m -venv env`
+    `python -m venv env`
 * Pour l'activer, lancer la commande :
     * Pour Linux :
     `env/bin/activate `
